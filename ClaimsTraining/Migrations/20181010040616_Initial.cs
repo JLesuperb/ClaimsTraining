@@ -5,12 +5,12 @@ using System.Collections.Generic;
 
 namespace ClaimsTraining.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Roles",
+                name: "TRoles",
                 columns: table => new
                 {
                     RoleId = table.Column<int>(nullable: false)
@@ -19,11 +19,11 @@ namespace ClaimsTraining.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Roles", x => x.RoleId);
+                    table.PrimaryKey("PK_TRoles", x => x.RoleId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "TUsers",
                 columns: table => new
                 {
                     UserId = table.Column<int>(nullable: false)
@@ -36,11 +36,11 @@ namespace ClaimsTraining.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.UserId);
+                    table.PrimaryKey("PK_TUsers", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Customers",
+                name: "TCustomers",
                 columns: table => new
                 {
                     CustomerId = table.Column<int>(nullable: false)
@@ -52,35 +52,36 @@ namespace ClaimsTraining.Migrations
                     ForeName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     PhoneNumer = table.Column<string>(nullable: true),
-                    RoleId = table.Column<int>(nullable: false)
+                    RoleFId = table.Column<int>(nullable: false),
+                    Token = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customers", x => x.CustomerId);
+                    table.PrimaryKey("PK_TCustomers", x => x.CustomerId);
                     table.ForeignKey(
-                        name: "FK_Customers_Roles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "Roles",
+                        name: "FK_TCustomers_TRoles_RoleFId",
+                        column: x => x.RoleFId,
+                        principalTable: "TRoles",
                         principalColumn: "RoleId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Customers_RoleId",
-                table: "Customers",
-                column: "RoleId");
+                name: "IX_TCustomers_RoleFId",
+                table: "TCustomers",
+                column: "RoleFId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Customers");
+                name: "TCustomers");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "TUsers");
 
             migrationBuilder.DropTable(
-                name: "Roles");
+                name: "TRoles");
         }
     }
 }

@@ -24,7 +24,7 @@ namespace ClaimsTraining.Services
         private readonly List<Customer> _Customers = new List<Customer>
         {
             new Customer { CustomerId = 1, FirstName = "Test", LastName = "User", CustomerName = "admin", CustomerPass = "test", Role = new Role{ RoleId=1, RoleName="Admin" } },
-            new Customer { CustomerId = 2, FirstName = "Test", LastName = "User", CustomerName = "user", CustomerPass = "test", Role = new Role{ RoleId=1, RoleName="User" } },
+            new Customer { CustomerId = 2, FirstName = "Test", LastName = "User", CustomerName = "user", CustomerPass = "test", Role = new Role{ RoleId=2, RoleName="User" } },
         };
 
         private readonly AppSettings _AppSettings;
@@ -53,8 +53,8 @@ namespace ClaimsTraining.Services
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Name, _Customer.CustomerName),
-                    new Claim("CompletedBasicTraining", "")
-
+                    //new Claim("CompletedBasicTraining", ""),
+                    new Claim(ClaimTypes.Role,_Customer.Role.RoleName)
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

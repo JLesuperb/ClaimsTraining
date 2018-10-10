@@ -11,8 +11,8 @@ using System;
 namespace ClaimsTraining.Migrations
 {
     [DbContext(typeof(DefaultContext))]
-    [Migration("20181008144816_initial")]
-    partial class initial
+    [Migration("20181010040616_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,13 +40,15 @@ namespace ClaimsTraining.Migrations
 
                     b.Property<string>("PhoneNumer");
 
-                    b.Property<int>("RoleId");
+                    b.Property<int>("RoleFId");
+
+                    b.Property<string>("Token");
 
                     b.HasKey("CustomerId");
 
-                    b.HasIndex("RoleId");
+                    b.HasIndex("RoleFId");
 
-                    b.ToTable("Customers");
+                    b.ToTable("TCustomers");
                 });
 
             modelBuilder.Entity("ClaimsTraining.Models.Role", b =>
@@ -58,7 +60,7 @@ namespace ClaimsTraining.Migrations
 
                     b.HasKey("RoleId");
 
-                    b.ToTable("Roles");
+                    b.ToTable("TRoles");
                 });
 
             modelBuilder.Entity("ClaimsTraining.Models.User", b =>
@@ -78,14 +80,14 @@ namespace ClaimsTraining.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users");
+                    b.ToTable("TUsers");
                 });
 
             modelBuilder.Entity("ClaimsTraining.Models.Customer", b =>
                 {
                     b.HasOne("ClaimsTraining.Models.Role", "Role")
                         .WithMany()
-                        .HasForeignKey("RoleId")
+                        .HasForeignKey("RoleFId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

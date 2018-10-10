@@ -1,9 +1,14 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ClaimsTraining.Models
 {
     public class Customer
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Int32? CustomerId { get; set; }
 
         public String FirstName { get; set; }
@@ -22,8 +27,9 @@ namespace ClaimsTraining.Models
 
         public String Token { get; set; }
 
-        public Int32 RoleId { get; set; }
+        public Int32 RoleFId { get; set; }
 
+        [ForeignKey("RoleFId")]
         public Role Role { get; set; }
     }
 }

@@ -33,7 +33,11 @@ namespace ClaimsTraining
             _Services.AddDbContext<DefaultContext>(_Options =>
                 _Options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                 _B => _B.MigrationsAssembly("ClaimsTraining")));
-            
+
+            //_Services.AddIdentity<Customer, Role>()
+            //    .AddEntityFrameworkStores<DefaultContext>()
+            //    .AddDefaultTokenProviders();
+
             var _AppSettingsSection = Configuration.GetSection("AppSettings");
             _Services.Configure<AppSettings>(_AppSettingsSection);
 
@@ -75,6 +79,8 @@ namespace ClaimsTraining
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseAuthentication();
 
             // global cors policy
             app.UseCors(x => x

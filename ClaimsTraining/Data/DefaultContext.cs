@@ -26,9 +26,9 @@ namespace ClaimsTraining.Data
 
         protected override void OnModelCreating(ModelBuilder _Builder)
         {
-            _Builder.Entity<User>().ToTable("Users");
-            _Builder.Entity<Customer>().ToTable("Customers");
-            _Builder.Entity<Role>().ToTable("Roles");
+            _Builder.Entity<User>().ToTable("TUsers");
+            _Builder.Entity<Customer>().ToTable("TCustomers");
+            _Builder.Entity<Role>().ToTable("TRoles");
         }
     }
 }
