@@ -11,5 +11,6 @@ namespace ClaimsTraining.Controllers
     [Route("api/Users")]
     public class UsersController : Controller
     {
+
     }
 }
